@@ -44,8 +44,10 @@ namespace DeleteTempFilesService
             {
                 timer.Stop();
                 DeleteClass.WriteErrorLog("Delete temp files started: " + DateTime.Now.ToString());
-                string tempPath = Environment.GetEnvironmentVariable("TEMP");
+                //string tempPath = Environment.GetEnvironmentVariable("TEMP");
+                string tempPath = Environment.ExpandEnvironmentVariables("%TEMP%");
                 DeleteClass.DeleteTempFiles(tempPath);
+
                 
                 timer.Start();
             }

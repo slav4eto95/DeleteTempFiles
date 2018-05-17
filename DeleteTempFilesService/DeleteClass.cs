@@ -36,7 +36,7 @@ namespace DeleteTempFilesService
             }
         }
 
-        public static void DeleteTempFiles(string pathToTempFiles)
+        /*public static void DeleteTempFiles(string pathToTempFiles)
         {
             try
             {
@@ -45,10 +45,37 @@ namespace DeleteTempFilesService
                 bool directoryExists = Directory.Exists(pathToTempFiles);
                 WriteErrorLog("Temp directory exists? - " + directoryExists);
             }
-            catch (Exception e)
+            catch
             {
-                WriteErrorLog(e);
+                //WriteErrorLog(e);
             }
+        }*/
+        // https://social.msdn.microsoft.com/Forums/en-US/12a84d42-c2db-4908-8161-9383c5b91003/how-to-delete-recent-prefetch-and-temp-items-in-system-using-c?forum=csharplanguage
+        public static void DeleteTempFiles(string folderName)
+        {
+            foreach (var folder in Directory.GetDirectories(folderName))
+            {
+                try
+                {
+                    Directory.Delete(folder, true);
+                }
+                catch
+                {
+                }
+            }
+            WriteErrorLog("Deleting folders - done!!");
+            foreach (var file in Directory.GetFiles(folderName))
+            {
+                try
+                {
+                    if (File.Exists(file))
+                        File.Delete(file);
+                }
+                catch
+                {
+                }
+            }
+            WriteErrorLog("Deleting files - done!!");
         }
     }
 }
