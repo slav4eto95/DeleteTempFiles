@@ -1,4 +1,4 @@
-# delete-temp-files
+# Delete temporary files
 Service that deletes the temp files in the computer
 
 Delete temp files is a Windows service that delete the temp files from the computer.
